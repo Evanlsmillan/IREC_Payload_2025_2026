@@ -2,12 +2,20 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+
 static const uint8_t ONE_WIRE_BUS = 2; // GP2
 
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
-void setup() {
+class tempSensor {
+    public:
+      tempSensor();
+      float getTempC();
+};
+
+
+tempSensor::tempSensor() {
   Serial.begin(115200);
   delay(1500); // give time for Serial Monitor to attach
   Serial.println("Starting DS18B20 test...");
@@ -23,12 +31,7 @@ void setup() {
   }
 }
 
-void loop() {
-  sensors.requestTemperatures();
-  float c = sensors.getTempCByIndex(0);
-
-  Serial.print("Temp C: ");
-  Serial.println(c);
-
-  delay(1000);
+float tempSensor::getTempC() {
+    sensors.requestTemperatures();
+    return sensors.getTempCByIndex(0);
 }

@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <Arduino.h>
+#include <SPI.h>
+#include <SD.h>
+
+//Define SPI protocol GPIO pins
+#define MISO_PIN 7 
+#define CS_PIN 9
+#define SCK_PIN 6
+#define MOSI_PIN 8
+#define CARD_DETECT_PIN 20
+
+class SDLogger {
+    File file;
+    std::string path;
+    public:
+        SDLogger(std::string directoryName, std::string title);
+        void sd_write(float data);
+};
+
+SDLogger::SDLogger(std::string directoryName, std::string title){
+
+    // Configure SPI pins for Pico
+    SPI.setRX(MISO_PIN);
+    SPI.setTX(MOSI_PIN);
+    SPI.setSCK(SCK_PIN);
+    SPI.begin();
+
+    pinMode(CS_PIN, OUTPUT);
+    digitalWrite(CS_PIN, HIGH);
+
+    if (!SD.begin(CS_PIN)) {
+        Serial.println("initialization of SD card failed");
+        while (1);
+    }
+    this -> path = directoryName + "/" + title;
+}
+
+void SDLogger::sd_write(float data){
+    //wait for SPI0 to becom available
+    file = SD.open(path.c_str(), FILE_WRITE);
+    file.print("temp C: ");;
+    file.println(data);
+    file.close();
+}
+
+/* NOTES: 
+- Using FAT32 data format 
+*/
