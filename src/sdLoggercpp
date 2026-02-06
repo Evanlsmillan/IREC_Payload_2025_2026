@@ -8,7 +8,6 @@
 #define CS_PIN 9
 #define SCK_PIN 6
 #define MOSI_PIN 8
-#define CARD_DETECT_PIN 20
 
 class SDLogger {
     File file;
@@ -20,14 +19,11 @@ class SDLogger {
 
 SDLogger::SDLogger(std::string directoryName, std::string title){
 
-    // Configure SPI pins for Pico
-    SPI.setRX(MISO_PIN);
-    SPI.setTX(MOSI_PIN);
-    SPI.setSCK(SCK_PIN);
-    SPI.begin();
-
+    // Configure SPI pin directions 
+    pinMode(MISO_PIN, INPUT);
+    pinMode(SCK_PIN, OUTPUT);
+    pinMode(MOSI_PIN, OUTPUT);
     pinMode(CS_PIN, OUTPUT);
-    digitalWrite(CS_PIN, HIGH);
 
     if (!SD.begin(CS_PIN)) {
         Serial.println("initialization of SD card failed");
@@ -39,6 +35,13 @@ SDLogger::SDLogger(std::string directoryName, std::string title){
 void SDLogger::sd_write(float data){
     //wait for SPI0 to becom available
     file = SD.open(path.c_str(), FILE_WRITE);
+    
+    //In case file doesn't open correctly 
+    if (!file) {
+        Serial.println("error opening file");
+        return;
+    }
+
     file.print("temp C: ");;
     file.println(data);
     file.close();

@@ -2,7 +2,6 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-
 static const uint8_t ONE_WIRE_BUS = 2; // GP2
 
 OneWire oneWire(ONE_WIRE_BUS);
@@ -13,7 +12,6 @@ class tempSensor {
       tempSensor();
       float getTempC();
 };
-
 
 tempSensor::tempSensor() {
   Serial.begin(115200);
