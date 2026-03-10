@@ -1,0 +1,22 @@
+Welcome to the Swamp Launch IREC Payload 2025-26 Repository!
+
+It's 2025, and more people are going on rockets. As commercial spaceflight expands, it is important to understand the complex effects of launch on biological systems. Our payload project, Bact to the Future presents a proposed comprehensive analysis on how launch affects metabolism in multiple model organisms, via a colorimetric essay and fluorescent analysis of RNA aptamers. 
+For one experiment, several model organisms, including E. coli will be placed on a 
+well-plate. Each species will be immersed in a growth medium specialized for their metabolic 
+needs, while also containing tetrazolium dyes. As they metabolize, they will reduce the dyes, 
+inducing a color change that would be visible by an ordinary camera. The greater the color 
+change, the more active the metabolism. 
+Simultaneously, the expression of the TBR gene in E. coli, an essential metabolic 
+indicator, will be measured via fluorescence. Before launch, fluorescent light‐up aptamers 
+(FLAPs) will be transgenically added to the circular genome of an E. coli cell at the end of the 
+TBR gene’s coding region. After transcription of the TBR gene, the FLAP’s RNA will fold and 
+form a structure that fluoresces under UV light. Therefore, by measuring change of fluorescence, 
+we can infer differences in gene expression (Neubacher and Hennig 2019). Both of these 
+experiments will run in control conditions in the lab and experimental conditions on the IREC 
+rocket, allowing us to observe how launch affects metabolism directly and indirectly, through the 
+expression of relevant genes.
+
+Software:
+The purpose of this repository is to program the drivers and algorithms for the temperature regulation, data collection, and actuators/injections.
+
+Our plan is to test components individually, and then test them cohesively with the full electronics system. After that is sucessful, we plan to fully integrate testing with our mechanical and electrical team in hopes for a seuccessful experiment during competition!
